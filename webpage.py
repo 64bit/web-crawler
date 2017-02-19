@@ -16,8 +16,7 @@ class WebPage(object):
     assets += self.get_js()
     assets += self.get_images()
     assets += self.get_links()
-    assets += self.get_anchors()
-    return assets
+    return map(lambda a: a.geturl(), assets) 
 
   def __resource(self, element, attribute):
     resources = []
