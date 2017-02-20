@@ -3,9 +3,8 @@ from bs4 import BeautifulSoup as BS
 import requests
 from urlparse import urlparse
 from urlparse import urljoin
-import mimetypes
 
-mimetypes.init()
+FILE_EXTENSIONS = ["pdf", "doc", "docx", "txt", "ps", "gif", "png", "jpg", "jpeg", "mp4"] 
 
 class WebPage(object):
 
@@ -73,7 +72,7 @@ class WebPage(object):
     all_anchors = self.get_anchors()
     
     def filter_files(f):
-      if "." + f.geturl().split(".")[-1] in mimetypes.types_map.keys(): 
+      if f.geturl().split(".")[-1] in FILE_EXTENSIONS: 
         return True
       return False
   
