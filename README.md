@@ -63,6 +63,11 @@ Queue Size: 330
 ...
 ```
 
+#### Runing Unittests
+```
+./run_tests.sh
+```
+
 ####Dependencies
 Python 2.7, requests, beautifulsoup
 
