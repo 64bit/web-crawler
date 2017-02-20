@@ -1,6 +1,5 @@
 import unittest
 from flask import Flask
-from flask_script import Manager
 from multiprocessing import Process
 from webpage import WebPage
 import time
