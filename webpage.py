@@ -19,7 +19,8 @@ class WebPage(object):
     assets += self.get_images()
     assets += self.get_stylesheets()
     assets += self.get_files()
-    return map(lambda a: a.geturl(), assets) 
+    # return unique set of urls ( assets can be repeated on same page )
+    return list(set(map(lambda a: a.geturl(), assets)))
 
   def __get_url(self, element, attribute, keep_fragments=True):
     resources = []

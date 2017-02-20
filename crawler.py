@@ -19,11 +19,12 @@ class Crawler(object):
     self.unvisited[seed_url] = True
     self.assets = [] 
     self.same_domain_rule  = SameDomainRule(self.seed_url.netloc)
+    self.MAX_LINKS_TO_VISIT = 2000
   
   # BFS
   def crawl(self):
 
-    while len(self.url_queue) > 0:
+    while len(self.url_queue) > 0 and len(self.discovered) <= self.MAX_LINKS_TO_VISIT:
       url = self.url_queue.popleft()
      
       if 'DEBUG' in os.environ:
