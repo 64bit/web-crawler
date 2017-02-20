@@ -1,7 +1,7 @@
 
 #### Intro
 
-Crawls the web within same domain, for example if start url is https://www.google.com, then it won't crawl https://maps.google.com. Crawler limits webpages visited to 2000. 
+Crawls the web within same domain, for example if start url is https://www.google.com, then it won't crawl https://maps.google.com. Crawler limits webpages visited to 2000. Crawler runs a BFS from start url. 
 
 ####Usage
 
@@ -38,6 +38,29 @@ Output of above command:
 To run in verbose mode, so as to see what crawler is doing at current moment:
 ```
 DEBUG=true ./crawl https://www.google.com
+```
+Snippet of intermediate output of above command, where "Queue Size" is the BFS queue size at given moment, also relative urls are getting converted to absolute url: 
+
+```
+...
+Queue Size: 334
+Fetching:  https://www.google.com/intl/en/about/products/products/
+converted:  //www.google.com/  -->  https://www.google.com/
+converted:  //www.google.com/  -->  https://www.google.com/
+Queue Size: 333
+Fetching:  https://www.google.com/intl/en/about/products/products/assistant/
+converted:  //www.google.com/  -->  https://www.google.com/
+converted:  //www.google.com/  -->  https://www.google.com/
+Queue Size: 332
+Fetching:  https://www.google.com/intl/en/about/products/products/pixel/
+converted:  //www.google.com/  -->  https://www.google.com/
+converted:  //www.google.com/  -->  https://www.google.com/
+Queue Size: 331
+Fetching:  https://www.google.com/intl/en/about/products/products/allo-duo/
+converted:  //www.google.com/  -->  https://www.google.com/
+converted:  //www.google.com/  -->  https://www.google.com/
+Queue Size: 330
+...
 ```
 
 ####Dependencies
