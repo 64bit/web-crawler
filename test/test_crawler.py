@@ -4,7 +4,7 @@ from multiprocessing import Process
 from crawler import Crawler
 import time
 
-class TestWebPage(unittest.TestCase):
+class TestCrawler(unittest.TestCase):
 
   SERVER = "http://127.0.0.1:5000/"
   NO_LINKS_HTML = "<html> <body>Hello World</body> </html>"
@@ -32,15 +32,15 @@ class TestWebPage(unittest.TestCase):
     self.flask_process.terminate()
 
   def test_no_links(self):
-    self.start_server(TestWebPage.NO_LINKS_HTML)  
-    crawler = Crawler(TestWebPage.SERVER)
+    self.start_server(TestCrawler.NO_LINKS_HTML)  
+    crawler = Crawler(TestCrawler.SERVER)
     crawler.crawl()
     self.assertMultiLineEqual("[\n  {\n    \"assets\": [], \n    \"url\": \"http://127.0.0.1:5000/\"\n  }\n]", crawler.assets_json())
 
 
   def test_js_links(self):
-    self.start_server(TestWebPage.JS_LINKS_HTML)
-    crawler = Crawler(TestWebPage.SERVER) 
+    self.start_server(TestCrawler.JS_LINKS_HTML)
+    crawler = Crawler(TestCrawler.SERVER) 
     crawler.crawl()
     expected = \
 '''[
@@ -56,8 +56,8 @@ class TestWebPage(unittest.TestCase):
 
 
   def test_stylesheet_links(self):
-    self.start_server(TestWebPage.STYLESHEET_LINKS_HTML)
-    crawler = Crawler(TestWebPage.SERVER) 
+    self.start_server(TestCrawler.STYLESHEET_LINKS_HTML)
+    crawler = Crawler(TestCrawler.SERVER) 
     crawler.crawl()
     expected = \
 '''[
@@ -72,8 +72,8 @@ class TestWebPage(unittest.TestCase):
 
 
   def test_image_links(self):
-    self.start_server(TestWebPage.IMAGE_LINKS_HTML)
-    crawler = Crawler(TestWebPage.SERVER) 
+    self.start_server(TestCrawler.IMAGE_LINKS_HTML)
+    crawler = Crawler(TestCrawler.SERVER) 
     crawler.crawl()
     expected = \
 '''[
@@ -88,8 +88,8 @@ class TestWebPage(unittest.TestCase):
 
 
   def test_anchor_links(self):
-    self.start_server(TestWebPage.ANCHOR_LINKS_HTML)
-    crawler = Crawler(TestWebPage.SERVER) 
+    self.start_server(TestCrawler.ANCHOR_LINKS_HTML)
+    crawler = Crawler(TestCrawler.SERVER) 
     crawler.crawl()
     expected = \
 '''[
@@ -105,8 +105,8 @@ class TestWebPage(unittest.TestCase):
     self.assertMultiLineEqual(expected, crawler.assets_json())
 
   def test_file_links(self):
-    self.start_server(TestWebPage.FILE_LINKS_HTML)
-    crawler = Crawler(TestWebPage.SERVER) 
+    self.start_server(TestCrawler.FILE_LINKS_HTML)
+    crawler = Crawler(TestCrawler.SERVER) 
     crawler.crawl()
     expected = \
 '''[
