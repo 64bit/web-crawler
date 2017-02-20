@@ -64,16 +64,18 @@ Queue Size: 330
 ```
 
 #### Running Unittests
+Unittests runs an actual webserver (flask) instead of mocking `requests.get(url)`
 ```
 ./run_tests.sh
 ```
 
 ####Dependencies
-Python 2.7, requests, beautifulsoup
+Python 2.7, requests, beautifulsoup, flask( required by unittests )
 
 ####Install Dependencies
 ```
 pip install requests
 pip install beautifulsoup4
+pip install flask
 ```
 Install other required modules using `pip`
