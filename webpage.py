@@ -18,16 +18,22 @@ class WebPage(object):
     assets += self.get_links()
     return map(lambda a: a.geturl(), assets) 
 
-  def __resource(self, element, attribute):
+  def __resource(self, element, attribute, keep_fragments=True):
     resources = []
     resources += self.soup.find_all(element)
     url_strings = filter(lambda val: val is not None, map(lambda res: res.get(attribute), resources))
     
     # parse url as well as convert relative url to absolute url
     def parse_url(url_str):
-      # TODO handle tel:11234567890
+      # TODO handle tel:11234567890, mailto:someone@somewhere.com
+      # TODO handle fragments?
       absolute_url = urljoin(self.page.url, url_str) 
-      if os.environ['DEBUG'] and url_str != absolute_url:
+
+      if not keep_fragments:
+        # get rid of fragment
+        absolute_url = absolute_url.split("#")[0]
+
+      if 'DEBUG' in os.environ and url_str != absolute_url:
         print "converted: ", url_str, " --> ", absolute_url
       return urlparse(absolute_url) 
 
@@ -43,5 +49,5 @@ class WebPage(object):
   def get_links(self):
     return self.__resource('link', 'href')
 
-  def get_anchors(self):
-    return self.__resource('a', 'href')
+  def get_anchors(self, keep_fragments=True):
+    return self.__resource('a', 'href', keep_fragments)
