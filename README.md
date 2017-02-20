@@ -63,7 +63,7 @@ Queue Size: 330
 ...
 ```
 
-#### Runing Unittests
+#### Running Unittests
 ```
 ./run_tests.sh
 ```
