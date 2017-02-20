@@ -50,5 +50,5 @@ class Crawler(object):
 
 
   def assets_json(self):
-    return json.dumps(self.assets, indent=2)  
+    return json.dumps(self.assets, indent=2, sort_keys=True)  
              
